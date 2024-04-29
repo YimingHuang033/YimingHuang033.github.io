@@ -33,6 +33,12 @@
         <p>
           I have wonderful collaborations with <a href="https://zhouziyu02.github.io/">Ziyu Zhou@HKUST(GZ) CityMind Lab</a>, <a href="mailto:rex.wangzihao@gmail.com">Zihao Wang@UHawaii-Manoa</a>. I am also looking forward to more interdisciplinary collaboration in the future.
         </p>
+        <p>
+        <div class="news-container">
+          <div class="news-item"><strong><font color="red">🚩Top Message</font></strong>: T.B.D. </div>
+        <div class="news-item"><strong>🎉News 2024.4.17:</strong> Congratulations to <a href="https://zhouziyu02.github.io/">Ziyu</a> - His <strong>SDformer</strong> is accepted by <strong>IJCAI '24!</strong>. It's really a interesting work!</div>
+        </div>
+        </p>
         <p style="text-align:center">
           <a href="mailto:yiminghuang2002@gmail.com">Email1</a> &nbsp;/&nbsp;
           <a href="mailto:huangyiming2002@126.com">Email2</a> &nbsp;/&nbsp;
@@ -47,6 +53,7 @@
       </td>
     </tr>
     </tbody></table>
+
 
 
 
@@ -209,7 +216,26 @@
     </tbody></table>
     <table width="100%" align="center" border="0" cellpadding="20"><tbody>
     <tr>
-      <td style="padding:20px; width:95%; vertical-align:middle; position:center;"><img src="images/EVA.jpg" width=100% ></td>
+      <td style="padding:20px; width:95%; vertical-align:middle; position:center;">
+        <div class="container">
+          <!-- 先把第一张图片显示出来 -->
+          <img class="on" src="images/EVA.jpg" />
+          <img src="images/mafty.png" />
+          <img src="images/jaime.png"/>
+
+          <!-- 左右切换 -->
+          <div class="left"><</div>
+          <div class="right">></div>
+          <!-- 焦点 -->
+          <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </td>
     </tr>
     </tbody></table>
 
@@ -231,11 +257,143 @@
     <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
     <tr>
       <td>
-        <p>This page is powered by <a href="https://jonbarron.info/">Jon Barron</a>'s Template.</p>
+        <p>Last update: 2024.4.29. This page is powered by <a href="https://jonbarron.info/">Jon Barron</a>'s Template, <a href="https://blog.csdn.net/ChyoD1811?type=blog">ChyoD1811</a>'s CSDN blog and ChatGPT.</p>
       </td>
     </tr>
     </tbody></table>
   </td>
 </tr>
+</table>
+
+<style type="text/css">
+  /* 整体容器的样式 */
+  .news-container {
+    width: 540px;
+    height: 90px;
+    overflow-y: scroll; /* 使用滚动条 */
+    border: 1px solid #cccccc;
+  }
+  /* 单个新闻条目的样式 */
+  .news-item {
+    padding: 2px;
+    border-bottom: 1px solid #eeeeee;
+  }
+  /* 当鼠标悬停在新闻条目上时的样式 */
+  .news-item:hover {
+    background-color: #f0f0f0;
+  }
+  /*清除边距*/
+  div,ul,li{
+    margin: 0;
+    padding: 0;
+  }
+  /*首先准备一个放图片的容器*/
+  .container{
+    width: 900px;
+    height: 500px;
+    position: relative;
+    /*top: 100px;*/
+    /*left: 30%;*/
+    /*border: 1px solid #ccc;*/
+  }
+  /*图片样式*/
+  .container img{
+    position: absolute;        /*把所有图片放在同一个位置*/
+    width: 100%;
+    transition-duration: 0.5s;    /*设置过渡时间*/
+    opacity: 0;                /*把所有图片变透明*/
+  }
+  /*图片显示开关*/
+  .container img.on{
+    opacity: 1;                /*用于显示图片*/
+  }
+  /*左右按钮 按钮用图片更好点,这里为了简便就用大于小于号*/
+  .left, .right{
+    position: absolute;
+    top: 40%;
+    width: 40px;
+    height: 60px;
+    line-height: 60px;
+    background-color: #666;
+    opacity: 0.5;
+    text-align: center;
+    font-size: 40px;
+    color: #ccc;
+    display: none;    /*先隐藏按钮*/
+    cursor: pointer;    /*设置鼠标悬停时的样式*/
+  }
+  .left{
+    left: 0;
+  }
+  .right{
+    right: 0;
+  }
+  .container:hover .left, .container:hover .right{
+    display: block;            /*鼠标悬停才容器范围内时显示按钮*/
+  }
+  .left:hover, .right:hover{
+    color: #fff;
+  }
+  /*焦点*/
+  .container ul{
+    position: absolute;
+    bottom: -100px;
+    max-width: 900px;
+    padding: 100px 400px;
+  }
+  .container ul li{
+    list-style: none;
+    float: left;
+    background-color: #ccc;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  .container ul li.active{
+    background-color: #282923;        /*焦点激活时的样式*/
+  }
+</style>
+
+<script type="text/javascript">
+  //1、找到container下的所有img标签,li标签,左右按钮
+  var aImgs = document.querySelectorAll('.container img');
+  var aLis = document.querySelectorAll('.container li');
+  var btnLeft = document.querySelector('.container .left');
+  var btnRight = document.querySelector('.container .right');
+  //点击事件
+  //点击按钮图片切换
+  var index = 0;        //当前图片下标
+  var lastIndex = 0;
+  btnRight.onclick = function(){
+    //记录上一张图片的下标
+    lastIndex = index;
+    //清除上一张图片的样式
+    aImgs[lastIndex].className = '';
+    aLis[lastIndex].className = '';
+    index++;
+    index %= aImgs.length;    //实现周期性变化
+    //设置当前图片的样式
+    aImgs[index].className = 'on';
+    aLis[index].className = 'active';
+  }
+  //左边按钮类似
+  btnLeft.onclick = function(){
+    //记录上一张图片的下标
+    lastIndex = index;
+    //清除上一张图片的样式
+    aImgs[lastIndex].className = '';
+    aLis[lastIndex].className = '';
+    index--;
+    if (index < 0) {
+      index = aImgs.length - 1;
+    }
+    //设置当前图片的样式
+    aImgs[index].className = 'on';
+    aLis[index].className = 'active';
+  }
+</script>
+
 </body>
 </html>
